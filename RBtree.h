@@ -30,7 +30,7 @@ Tree *insert_RBtree(Tree *h, char *key);
 Tree *search_RBtree(Tree *h, char *key);
 
 //libera a arvore RB da memoria
-void *destroy_RBtree(Tree *h);
+void destroy_RBtree(Tree *h);
 
 
 

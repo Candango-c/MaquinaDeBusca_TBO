@@ -5,6 +5,12 @@
 
 #include "RBtree.h"
 
+
+//a key vai guardar a palavra
+//o value vai guardar os arquivos onde essa palavra marca presença
+//color guarda a cor do nó
+//o "l" guarda o nó a esquerda (menor valor) enquanto o "r" guarda o nó a direita (maior valor)
+// as keys que serão utilizadas pra fazer a comparação entre os nós
 struct Tree{
 
     char *key;
@@ -58,7 +64,7 @@ Tree *create_nodeRB(char *key){
     strcpy(n->key, key);
 
     n->value = NULL;
-    n->color = RED;   // todo novo nó entra vermelho na árvore
+    n->color = RED;   // todo novo nó é inserido como vermelho na árvore
     n->l = NULL;
     n->r = NULL;
     return n;
@@ -70,12 +76,63 @@ Tree *insert_RBtree(Tree *h, char *key){
     if(h == NULL){
         h = create_nodeRB(key);
     }
+    int cmp = strcmp(key, h->key);
+    if(cmp < 0){
+        h->l = insert_RBtree(h->l, key);
+    } else if(cmp > 0){
+        h->r = insert_RBtree(h->r, key);
+    } else {
+        //a chave já foi inserida na árvore
+    }
 
-    
+    //area de ajuste da árvore (rotações e mudanças de cor)
+
+    //lean left
+    if(is_Red(h->r) && !is_Red(h->l)){
+        h = rotate_Left(h);
+    }
+
+    //balance 4-node
+    if(is_Red(h->l) && is_Red(h->l->l)){
+        h = rotate_Right(h);
+    }
+
+    //split 4-node
+    if(is_Red(h->l) && is_Red(h->r)){
+        flip_Colors(h);
+    }
+
+    return h;
+
 }
 
 //procura a existencia daquele elemento na arvore RB
-Tree *search_RBtree(Tree *h, char *key);
+Tree *search_RBtree(Tree *h, char *key){
+    while(h !=NULL){
+
+        int cmp = strcmp(key, h->key);
+
+        if(cmp < 0){
+            h = h->l;
+        } else if(cmp > 0){
+            h = h->r;
+        } else {
+            return h; //achou
+        }
+    }
+    return NULL; //não encontrou
+}
 
 //libera a arvore RB da memoria
-void *destroy_RBtree(Tree *h);
+void destroy_RBtree(Tree *h){
+
+    if(h != NULL){
+        destroy_RBtree(h->l); //libera a esquerda do nó
+        destroy_RBtree(h->r); //libera a direita do nó
+        free(h->key); // libera a chave do nó
+        free(h); // libera o nó
+    }
+
+    return;
+
+}
