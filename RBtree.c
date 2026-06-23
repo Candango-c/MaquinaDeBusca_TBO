@@ -59,7 +59,10 @@ void flip_Colors(Tree *h){
 //cria um nó para a arvore RB
 Tree *create_nodeRB(char *key){
     Tree *n = malloc(sizeof(Tree));
-    
+
+    if(n == NULL){ 
+        return NULL; //verifica se foi criado corretamente
+    }
     n->key = malloc(strlen(key) + 1); // +1 é pra incluir o '\0'
     strcpy(n->key, key);
 
@@ -82,7 +85,7 @@ Tree *insert_RBtree(Tree *h, char *key){
     } else if(cmp > 0){
         h->r = insert_RBtree(h->r, key);
     } else {
-        //a chave já foi inserida na árvore
+        //a chave ja existe
     }
 
     //area de ajuste da árvore (rotações e mudanças de cor)
@@ -123,16 +126,36 @@ Tree *search_RBtree(Tree *h, char *key){
     return NULL; //não encontrou
 }
 
+
+//retorna o value do nó
+void *get_valueRB(Tree *h){
+    return h->value;
+}
+
+//configura um valor para o nó
+void set_valueRB(Tree *h, void *value){
+    h->value = value;
+}
+
+//função criada para percorre a arvore aplicando uma função em canda nó
+//foi necessario criar essa função para conseguir liberar as arvores internas
+//que são criadas no indexador
+void run_functRB(Tree *h, void (*funct)(Tree *)){
+    if(h != NULL){
+        run_functRB(h->l, funct);
+        funct(h);
+        run_functRB(h->r, funct);
+    }
+}
+
+
 //libera a arvore RB da memoria
 void destroy_RBtree(Tree *h){
-
     if(h != NULL){
+
         destroy_RBtree(h->l); //libera a esquerda do nó
         destroy_RBtree(h->r); //libera a direita do nó
         free(h->key); // libera a chave do nó
         free(h); // libera o nó
     }
-
-    return;
-
 }

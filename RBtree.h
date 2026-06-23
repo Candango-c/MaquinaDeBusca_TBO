@@ -1,5 +1,5 @@
-#ifndef RBtree
-#define RBtree
+#ifndef RBtree_H
+#define RBtree_H
 
 #include <stdbool.h>
 
@@ -29,9 +29,18 @@ Tree *insert_RBtree(Tree *h, char *key);
 //procura a existencia daquele elemento na arvore RB
 Tree *search_RBtree(Tree *h, char *key);
 
+//retorna o value do nó
+void *get_valueRB(Tree *h);
+
+//configura um valor para o nó
+void set_valueRB(Tree *h, void *value);
+
+//função criada para percorre a arvore aplicando uma função em canda nó
+//foi necessario criar essa função para conseguir liberar as arvores internas
+//que sao utilizadas no indexador
+void run_functRB(Tree *h, void (*funct)(Tree *));
+
 //libera a arvore RB da memoria
 void destroy_RBtree(Tree *h);
-
-
 
 #endif
