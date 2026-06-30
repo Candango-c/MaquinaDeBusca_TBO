@@ -8,6 +8,9 @@
 
 typedef struct Tree Tree;
 
+//converte string para minúsculas para na comparação ficar a == A
+void convert_to_lowerS(char *s);
+
 //verifica a cor atual do nó na arvore
 bool is_Red(Tree *h);
 
@@ -32,11 +35,14 @@ Tree *search_RBtree(Tree *h, char *key);
 //retorna o value do nó
 void *get_valueRB(Tree *h);
 
+//retorna a key do nó
+void *get_keyRB(Tree *h);
+
 //configura um valor para o nó
 void set_valueRB(Tree *h, void *value);
 
 //função criada para percorre a arvore aplicando uma função em canda nó
-//foi necessario criar essa função para conseguir liberar as arvores internas
+//foi necessario criar essa função para conseguir percorrer as arvores internas
 //que sao utilizadas no indexador
 void run_functRB(Tree *h, void (*funct)(Tree *));
 
