@@ -19,16 +19,6 @@ struct Tree{
     struct Tree *l, *r;
 };
 
-//converte string para minúsculas para na comparação ficar a == A
-void convert_to_lowerS(char *s){
-    for(int i = 0; s[i] != '\0'; i++){
-
-        if(s[i] >= 'A' && s[i] <= 'Z'){
-            s[i] = s[i] + (32); //32 é a diferença entre o caracter maiusculo e minusculo na tabela ascii
-        }
-    }
-}
-
 //verifica a cor atual do nó na arvore
 bool is_Red(Tree *h){
     if(h == NULL){
@@ -89,9 +79,6 @@ Tree *insert_RBtree(Tree *h, char *key){
     if(h == NULL){
         h = create_nodeRB(key);
     }
-
-    //deixa a key inteira minuscula, na comparação a==A
-    convert_to_lowerS(key);
 
     int cmp = strcmp(key, h->key);
     if(cmp < 0){

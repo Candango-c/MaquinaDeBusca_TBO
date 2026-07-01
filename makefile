@@ -1,13 +1,16 @@
 all: trab2
 
 trab2: RBtree.o indexador.o main.c
-	gcc -o trab2 RBtree.o indexador.o main.c
+	gcc -o trab2 RBtree.o indexador.o pageRanking.o main.c
 
 RBtree.o: RBtree.c RBtree.h
 	gcc -c RBtree.c 
 
 indexador.o: indexador.c indexador.h
 	gcc -c indexador.c
+
+pageRanking.o: pageRanking.c pageRanking.h
+	gcc -c pageRanking.c
 
 clean:
 	rm -f *.o trab2

@@ -1,5 +1,5 @@
-#ifndef RBtree_H
-#define RBtree_H
+#ifndef RBTREE_H
+#define RBTREE_H
 
 #include <stdbool.h>
 
@@ -7,9 +7,6 @@
 #define BLACK false
 
 typedef struct Tree Tree;
-
-//converte string para minúsculas para na comparação ficar a == A
-void convert_to_lowerS(char *s);
 
 //verifica a cor atual do nó na arvore
 bool is_Red(Tree *h);
