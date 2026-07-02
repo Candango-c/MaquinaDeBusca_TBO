@@ -1,6 +1,6 @@
 all: trab2
 
-trab2: RBtree.o indexador.o main.c
+trab2: RBtree.o indexador.o pageRanking.o processadorCon.o main.c
 	gcc -o trab2 RBtree.o indexador.o pageRanking.o processadorCon.o main.c -lm
 
 RBtree.o: RBtree.c RBtree.h
