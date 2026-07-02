@@ -55,9 +55,8 @@ void add_page_pageRanking(pageRanking *p, char *name){
     p->grafo_pages = insert_RBtree(p->grafo_pages, name);
     Tree *pagina = search_RBtree(p->grafo_pages, name);
 
-    int *ind;
-    ind = malloc(sizeof(int));
-    ind = p->n;
+    int *ind = malloc(sizeof(int));
+    *ind = p->n;
 
     set_valueRB(pagina, ind);
 
@@ -78,7 +77,7 @@ int get_ind_pageRank(pageRanking *p, char *name){
     if(page == NULL){
         return -1;
     } else {
-        return get_valueRB(page);
+        return *(int*)get_valueRB(page);
     }
 }
 
@@ -182,6 +181,20 @@ double get_pageRank(pageRanking *p, char *name){
     } else {
         return 0;
     }
+}
+
+//retorna a quantidade de paginas no pageranking
+int get_n_pageRank(pageRanking *p){
+    return p->n;
+}
+
+//retorna o nome da pagina no indice passado
+char *get_name_pageRank(pageRanking *p, int i){
+    //verifica se é valido
+    if(i < 0 || i >= p->n){
+        return NULL;
+    }
+    return p->pages[i].name;
 }
 
 //função para liberar o indice (que atua como value) no grafico de paginas

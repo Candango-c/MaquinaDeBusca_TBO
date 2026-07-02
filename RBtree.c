@@ -114,9 +114,6 @@ Tree *insert_RBtree(Tree *h, char *key){
 Tree *search_RBtree(Tree *h, char *key){
     while(h !=NULL){
 
-        //converte pra minusculo
-        convert_to_lowerS(key);
-
         int cmp = strcmp(key, h->key);
 
         if(cmp < 0){

@@ -25,6 +25,12 @@ void calculate_pageRank(pageRanking *p);
 //retorna o pageRank da pagina
 double get_pageRank(pageRanking *p, char *name);
 
+//retorna a quantidade de paginas no pageranking
+int get_n_pageRank(pageRanking *p);
+
+//retorna o nome da pagina no indice passado
+char *get_name_pageRank(pageRanking *p, int i);
+
 //função para liberar o indice (que atua como value) no grafico de paginas
 void destroy_ind(Tree *h);
 
