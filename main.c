@@ -175,9 +175,9 @@ int main(int argc, char *argv[]){
         char *original = strdup(line);
 
         //separa os termos
-        char **terms = NULL;
         int nTerms = 0;
         int capacityTerms = 2;
+        char **terms = malloc(sizeof(char*) * capacityTerms);
 
         char *tok = strtok(line, " \t");
 

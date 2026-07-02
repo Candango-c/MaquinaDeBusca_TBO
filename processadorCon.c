@@ -105,7 +105,7 @@ void init_process(Index *ind, pageRanking *p, char *word, char **terms, int nTer
     printf("pr:");
 
     for(int i=0; i < nCheck; i++){
-        printf("%.8f", checkDoc[i].pagerank);
+        printf("%.17f", checkDoc[i].pagerank);
         if(!(i== nCheck -1)){
             printf(" ");
         }

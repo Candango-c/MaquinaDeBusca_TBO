@@ -112,6 +112,10 @@ void set_links(pageRanking *p, char *link_in, char **links_out, int n_linksOut){
 void calculate_pageRank(pageRanking *p){
 //usar numero no formato 0.0 ja que é double
 //alpha é 0.85
+    if(p->n == 0){
+        return;
+    }
+    
     for(int i=0; i < p->n; i++){
         p->pages[i].pagerank = 1.0/p->n; //inicializa os pageRanks das paginas
     }
